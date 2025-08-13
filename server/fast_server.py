@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import csv
 import io
+import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -675,10 +676,12 @@ if __name__ == "__main__":
     print("  • GET /dashboard/data - Get dashboard data")
     print("  • GET /docs - Interactive API documentation")
     
+    port = int(os.environ.get("PORT", 8000))  # use Render's PORT if provided
+
     uvicorn.run(
         "main:app", 
         host="0.0.0.0", 
-        port=8000, 
+        port=port, 
         reload=True,
         log_level="info"
     )
